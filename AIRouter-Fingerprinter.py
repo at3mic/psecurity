@@ -40,7 +40,7 @@ def fingerPrint(listArgs):
         oResponse = getPage(f"{sURL}/login")
         if oResponse and oResponse.status_code == 200:
             if '9Router - AI Infrastructure Management' in oResponse.text:
-                sVersion = requests.get(f"{sURL}/api/version").json()["currentVersion"]
+                sVersion = requests.get(f"{sURL}/api/version", verify=False, proxies={'https':sProxy}, headers = dicHeaders, timeout = iTimeout).json()["currentVersion"]
                 sDefaultPassword = "success" in requests.post(f"{sURL}/api/auth/login", verify=False, proxies={'https':sProxy}, headers = nineRouterHeaders, timeout = iTimeout).text
                 print(f'🤖 [+] {sURL}: 9Router, version {sVersion}')
                 sVersionTuple = tuple(map(int, sVersion.split(".")))
