@@ -48,8 +48,11 @@ def fingerPrint(listArgs):
                 print(f'🤖 [+] {sURL}: 9Router, version {sVersion}')
                 sVersionTuple = tuple(map(int, sVersion.split(".")))
                 if boolVulns:
-                    if (0, 2, 21) <= sVersionTuple <= (0, 4, 41):
-                        print(f'  ⚠️  [!] {sURL} (9Router) is vulnerable to hardcoded JWT!')
+                    try:
+                        if (0, 2, 21) <= sVersionTuple <= (0, 4, 41):
+                            print(f'  ⚠️  [!] {sURL} (9Router) is vulnerable to hardcoded JWT!')
+                    except:
+                        pass
                     if sDefaultPassword:
                         print(f'  🔑  [!] {sURL} (9Router) has the default password!')
             return
